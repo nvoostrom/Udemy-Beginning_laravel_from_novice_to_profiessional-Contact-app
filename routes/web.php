@@ -15,9 +15,9 @@ use Illuminate\Support\Facades\Route;
 
 function getcontacts(){
     return [
-        1 => ['name' => 'Name 1', 'phone' => '1234567890'],
-        2 => ['name' => 'Name 2', 'phone' => '2345678901'],
-        3 => ['name' => 'Name 3', 'phone' => '3456789012'],
+        ['id'=> 1, 'name' => 'Name 1', 'phone' => '1234567890'],
+        ['id'=> 2, 'name' => 'Name 2', 'phone' => '2345678901'],
+        ['id'=> 3, 'name' => 'Name 3', 'phone' => '3456789012'],
     ];
 };
 
@@ -27,21 +27,32 @@ Route::get('/', function () {
 
 Route::prefix('admin')->group(function () {
     Route::get('/contacts', function () {
+        $companies = [
+            1 => ['name' => 'Company One', 'contacts' => 3],
+            2 => ['name' => 'Company Two', 'contacts' => 5],
+        ];
         $contacts = getcontacts();
 
-        return view('contact.index', compact('contacts'));
-    })->name('contacts.index');
+        return view('contact.index', compact('contacts', 'companies'));
+    })->name('contacts');
     
     Route::get('/contacts/create', function () {
         return view('contact.create');
-    })->name('contacts.create');
+    })->name('create');
     
+    Route::get('/contact/edit/{id}', function ($id) {
+        $contacts = getcontacts();
+        abort_if(!isset($contacts[$id]), 404);
+        $contact = $contacts[$id];
+        return view('contact.edit');
+    })->name('edit');
+
     Route::get('/contacts/{id}', function ($id) {
         $contacts = getcontacts();
         abort_if(!isset($contacts[$id]), 404);
         $contact = $contacts[$id];
         return view('contact.id')->with('contact', $contact);
-    })->whereNumber('id')->name('contacts.show');
+    })->whereNumber('id')->name('show');
 });
 
 

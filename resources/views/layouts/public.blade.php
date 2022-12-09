@@ -5,10 +5,11 @@
 
 <body>
     <!-- navbar -->
-    @include('layouts.navbar')
+    @include('layouts.navbarPublic')
     <!-- content -->
     @yield('content')
     <!-- scripts -->
+    @include('layouts.footer')
     @include('layouts.script')
 
 </body>

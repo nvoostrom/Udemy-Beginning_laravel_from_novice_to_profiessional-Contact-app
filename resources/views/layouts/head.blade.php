@@ -1,12 +1,9 @@
-@extends('layouts.main')
-
-@section('head')
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>My Contact</title>
+    <title>@yield('title')</title>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Varela+Round">
     <!-- Bootstrap -->
@@ -15,5 +12,4 @@
     {{asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="
     {{asset('css/custom.css') }}" rel="stylesheet">
-  </head>
-@endsection
+</head>
