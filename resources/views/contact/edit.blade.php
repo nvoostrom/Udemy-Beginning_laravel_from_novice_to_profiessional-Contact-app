@@ -4,5 +4,5 @@
 
 @section('content')
     <h1>Edit contact</h1>
-    <a href="{{ route('contacts') }}">go back</a>
+    <a href="{{ route('contacts.index') }}">go back</a>
 @endsection
